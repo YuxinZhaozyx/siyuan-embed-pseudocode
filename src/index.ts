@@ -206,7 +206,9 @@ export default class PseudocodePlugin extends Plugin {
       console.log('v---code', code);
 
       this.setAutoAlgorithmNumber(blockElement, pseudocodeConfig);
+      console.log('v---pseudocodeConfig', pseudocodeConfig);
       const compileResult = compilePseudocode(code, pseudocodeConfig);
+      console.log('v---compileResult', compileResult);
       this.updatePseudocodeBlockData(blockID, code, pseudocodeConfig, () => {
         this.updatePseudocodeElements(blockID, pseudocodeConfig, compileResult);
       });
