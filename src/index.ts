@@ -93,7 +93,7 @@ export default class PseudocodePlugin extends Plugin {
         this.updatePseudocodeViewAttribute(blockID, pseudocodeConfig.view);
         this.updatePseudocodeBlockData(blockID, code, pseudocodeConfig, () => {
           this.updatePseudocodeElements(blockID, pseudocodeConfig, compileResult);
-          const blockElement = document.querySelector(`[data-node-id="${blockID}"]`) as HTMLElement;
+          const blockElement = document.querySelector(`protyle-wysiwyg [data-node-id="${blockID}"]`) as HTMLElement;
           if (blockElement) {
             this.openEditDialog(blockElement, false, false);
           }
@@ -261,7 +261,7 @@ export default class PseudocodePlugin extends Plugin {
 
   private updatePseudocodeElements(blockID: string, config: IPseudocodeConfig, compileResult: IResCompilePseudocode) {
     if (compileResult) {
-      document.querySelectorAll(`[data-node-id="${blockID}"]`).forEach((blockElement: HTMLElement) => {
+      document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${blockID}"]`).forEach((blockElement: HTMLElement) => {
         if (config.view == "pseudocode") {
           this.switchPseudocodeView("on", blockElement);
           const containerElement = blockElement.querySelector(".pseudocode-container") as HTMLElement;
@@ -437,10 +437,9 @@ export default class PseudocodePlugin extends Plugin {
   private setAutoAlgorithmNumber(blockElement: HTMLElement, pseudocodeConfig: IPseudocodeConfig) {
     if (!pseudocodeConfig.algorithmNumber) {
       let rootElement = blockElement;
-      while (rootElement.parentElement && !rootElement.parentElement.classList.contains("protyle")) {
+      while (rootElement.parentElement && !rootElement.classList.contains("protyle-wysiwyg")) {
         rootElement = rootElement.parentElement;
       }
-      rootElement = rootElement.parentElement;
       const originType = blockElement.getAttribute("data-type");
       const originView = blockElement.getAttribute("custom-view");
       blockElement.setAttribute("data-type", "NodeCodeBlock");
