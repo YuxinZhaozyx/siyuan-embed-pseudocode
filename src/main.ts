@@ -1,6 +1,24 @@
 import { fetchPost, fetchSyncPost } from "@/utils/fetch";
 import { compilePseudocode } from "@/pseudocode";
 
+export function turnOnAllPseudocodeView() {
+  document.querySelectorAll(".code-block[data-type='NodeCodeBlock'][custom-view='pseudocode']").forEach((blockElement: HTMLElement) => {
+    const blockID = blockElement.getAttribute("data-node-id");
+    const code = getBlockPseudocodeCode(blockElement);
+    const pseudocodeConfig = getBlockPseudocodeConfigByElement(blockElement);
+    setAutoAlgorithmNumber(blockElement, pseudocodeConfig);
+    const compileResult = compilePseudocode(code, pseudocodeConfig);
+    updatePseudocodeViewAttribute(blockID, pseudocodeConfig.view);
+    updatePseudocodeElements(blockID, pseudocodeConfig, compileResult);
+  }); 
+}
+
+export function turnOffAllPseudocodeView() {
+  document.querySelectorAll(".code-block[data-type='NodeCodeBlock'][custom-view='pseudocode']").forEach((blockElement: HTMLElement) => {
+    switchPseudocodeView("off", blockElement);
+  }); 
+}
+
 export function setAutoCompileMuatationObserver(element: HTMLElement): MutationObserver {
   const mutationObserver = new MutationObserver(mutations => {
     for (const mutation of mutations) {
@@ -88,11 +106,10 @@ export function switchPseudocodeView(mode: "on" | "off", blockElement: HTMLEleme
   if (codeElement) {
     codeElement.classList.toggle("fn__none", mode === "on");
     blockElement.querySelector(".protyle-action__language").classList.toggle("fn__none", mode === "on");
-    blockElement.setAttribute("custom-view", mode === "on" ? "pseudocode" : "");
     const containerElement = blockElement.querySelector(".pseudocode-container");
     if (mode === "on") {
       if (!containerElement) {
-        codeElement.insertAdjacentHTML('afterend', '<div class="pseudocode-container"></div>');
+        codeElement.insertAdjacentHTML('afterend', '<div class="pseudocode-container" contenteditable="false"></div>');
       }
     } else {
       if (containerElement) containerElement.remove();
@@ -101,6 +118,9 @@ export function switchPseudocodeView(mode: "on" | "off", blockElement: HTMLEleme
 }
 
 export function updatePseudocodeViewAttribute(blockID: string, view: string) {
+  document.querySelectorAll(`.code-block[data-node-id="${blockID}"]`).forEach((blockElement: HTMLElement) => {
+    blockElement.setAttribute("custom-view", view);
+  });
   fetchPost("/api/attr/setBlockAttrs", {
     id: blockID,
     attrs: {

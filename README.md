@@ -86,6 +86,9 @@ Click the menu button on the left side of a Pseudocode Widget block. An option l
 
 ## Changelog
 
++ v0.5.2
+    + Fix: need manual refresh when load and unload plugin
+    + Fix: pseudocode block view is editable
 + v0.5.1
     + Fix: compile always fails
     + Feature: PDF export support

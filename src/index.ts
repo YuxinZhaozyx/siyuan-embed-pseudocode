@@ -20,6 +20,8 @@ import {
   updatePseudocodeViewAttribute,
   switchPseudocodeView,
   setAutoCompileMuatationObserver,
+  turnOnAllPseudocodeView,
+  turnOffAllPseudocodeView,
 } from "@/main";
 
 let PluginInfo = {
@@ -58,6 +60,8 @@ export default class PseudocodePlugin extends Plugin {
     this.setPdfScript();
 
     initPseudocode();
+    
+    turnOnAllPseudocodeView();
 
     this._mutationObserver = setAutoCompileMuatationObserver(document.body);
 
@@ -92,6 +96,7 @@ export default class PseudocodePlugin extends Plugin {
   }
 
   onunload() {
+    turnOffAllPseudocodeView();
     if (this._mutationObserver) this._mutationObserver.disconnect();
     if (this._clickBlockIconHandler) this.eventBus.off("click-blockicon", this._clickBlockIconHandler);
     if (this._globalKeyDownHandler) document.documentElement.removeEventListener("keydown", this._globalKeyDownHandler);
