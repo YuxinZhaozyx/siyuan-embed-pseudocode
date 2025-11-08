@@ -86,6 +86,8 @@ Click the menu button on the left side of a Pseudocode Widget block. An option l
 
 ## Changelog
 
++ v0.5.3
+    + Fix: render existed pseudocode code fail when boot plugin
 + v0.5.2
     + Fix: need manual refresh when load and unload plugin
     + Fix: pseudocode block view is editable

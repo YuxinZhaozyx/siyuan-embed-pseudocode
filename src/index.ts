@@ -59,9 +59,9 @@ export default class PseudocodePlugin extends Plugin {
 
     this.setPdfScript();
 
-    initPseudocode();
-    
-    turnOnAllPseudocodeView();
+    initPseudocode(() => {
+      turnOnAllPseudocodeView();
+    });
 
     this._mutationObserver = setAutoCompileMuatationObserver(document.body);
 

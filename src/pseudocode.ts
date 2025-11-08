@@ -1,11 +1,12 @@
 import { addScript, addStyle } from "./utils";
 
-export function initPseudocode() {
-  // loadUmdScript("/plugins/siyuan-embed-pseudocode/libs/katex/katex.min.js", 'katex');
+export function initPseudocode(callback?: () => void) {
   addScript("/stage/protyle/js/katex/katex.min.css", "protyleKatexStyle");
   addScript("/stage/protyle/js/katex/katex.min.js", "protyleKatexScript").then(() => {
     addStyle("/plugins/siyuan-embed-pseudocode/libs/pseudocode/pseudocode.min.css", 'pseudocodeStyle');
-    addScript("/plugins/siyuan-embed-pseudocode/libs/pseudocode/pseudocode.min.js", 'pseudocodeScript');
+    addScript("/plugins/siyuan-embed-pseudocode/libs/pseudocode/pseudocode.min.js", 'pseudocodeScript').then(() => {
+      if (callback) callback();
+    });
   })
 }
 

@@ -6,6 +6,7 @@ import { initPseudocode } from "./pseudocode";
 
 console.log("pseudocode daemon start");
 
-initPseudocode();
-turnOnAllPseudocodeView();
+initPseudocode(() => {
+    turnOnAllPseudocodeView();
+});
 setAutoCompileMuatationObserver(document.documentElement);
