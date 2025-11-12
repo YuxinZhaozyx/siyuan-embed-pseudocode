@@ -109,7 +109,7 @@ export function switchPseudocodeView(mode: "on" | "off", blockElement: HTMLEleme
     const containerElement = blockElement.querySelector(".pseudocode-container");
     if (mode === "on") {
       if (!containerElement) {
-        codeElement.insertAdjacentHTML('afterend', '<div class="pseudocode-container" contenteditable="false"></div>');
+        codeElement.insertAdjacentHTML('afterend', '<div spin="1" class="pseudocode-container" contenteditable="false"></div>');
       }
     } else {
       if (containerElement) containerElement.remove();

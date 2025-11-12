@@ -66,9 +66,9 @@ export default class PseudocodePlugin extends Plugin {
     this._mutationObserver = setAutoCompileMuatationObserver(document.body);
 
     this.protyleSlash = [{
-      filter: ["pseudocode"],
+      filter: ["pseudocode", "伪代码", "weidaima"],
       id: "pseudocode",
-      html: `<div class="b3-list-item__first"><svg class="b3-list-item__graphic"><use xlink:href="#iconCode"></use></svg><span class="b3-list-item__text">pseudocode</span></div>`,
+      html: `<div class="b3-list-item__first"><svg class="b3-list-item__graphic"><use xlink:href="#iconCode"></use></svg><span class="b3-list-item__text">${this.i18n.pseudocode}</span></div>`,
       callback: (protyle, nodeElement) => {
         const code = "";
         const blockID = nodeElement.getAttribute("data-node-id");
