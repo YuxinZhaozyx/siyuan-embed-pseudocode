@@ -35,8 +35,8 @@ export default defineConfig(({
   console.log(`\nPlugin will build to:\n${devDistDir}`)
 
   const args = minimist(process.argv.slice(2))
-  const isWatch = process.argv.includes('--dev') || args.watch || args.w || false
-  const distDir = isWatch ? devDistDir : "./dist"
+  const isWatch = args.watch || args.w || false
+  const distDir = (isWatch || mode === "development") ? devDistDir : "./dist"
 
   console.log()
   console.log("isWatch=>", isWatch)

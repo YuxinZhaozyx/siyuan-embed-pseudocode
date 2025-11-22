@@ -1,6 +1,6 @@
 {
   "name": "siyuan-embed-pseudocode",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "type": "module",
   "description": "This is a plugin for siyuan",
   "author": "",
@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "pnpm dev:daemon && pnpm dev:index",
     "dev:index": "vite build --watch",
-    "dev:daemon": "vite build --config vite.daemon.config.ts -- --dev",
+    "dev:daemon": "vite build --config vite.daemon.config.ts --mode=development",
     "release": "node ./release.js",
     "release:manual": "node ./release.js --mode=manual",
     "release:patch": "node ./release.js --mode=patch",

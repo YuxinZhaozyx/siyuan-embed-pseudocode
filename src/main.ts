@@ -170,7 +170,7 @@ export function getBlockPseudocodeConfigByElement(blockElement: HTMLElement): IP
 }
 
 export function getBlockPseudocodeCode(blockElement: HTMLElement): string {
-  return blockElement.querySelector(".hljs [contenteditable]")?.textContent || "";
+  return blockElement.querySelector(".hljs [contenteditable]:not(.protyle-linenumber__rows)")?.textContent || "";
 }
 
 export function setAutoAlgorithmNumber(blockElement: HTMLElement, pseudocodeConfig: IPseudocodeConfig) {

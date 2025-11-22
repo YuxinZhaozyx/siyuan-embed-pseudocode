@@ -86,6 +86,8 @@ Click the menu button on the left side of a Pseudocode Widget block. An option l
 
 ## Changelog
 
++ v0.5.7
+    + Fix: render fail when turn on codeblock line numbers
 + v0.5.6
     + change SiYuan version requirements: >=3.0.0
 + v0.5.5
